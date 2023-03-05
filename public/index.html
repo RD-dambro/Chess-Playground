@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Playground</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <main class="noselect">
+      <h1>Chess Playground</h1>
+
+      <!-- chessboard -->
+      <div id="chessboard"></div>
+
+      <!-- promotion popup -->
+      <div id="promotion-popup" class="hidden">
+        Choose a promotion:
+        <span id="Queen" class="option"></span>
+        <span id="Rook" class="option"></span>
+        <span id="Bishop" class="option"></span>
+        <span id="Knight" class="option"></span>
+      </div>
+
+      <!-- game end popup -->
+      <div id="gameend-popup" class="hidden">
+        <span id="result"></span>
+        <button id="rematch">rematch</button>
+      </div>
+    </main>
+    <script src="js/Piece.js"></script>
+    <script src="js/Pawn.js"></script>
+    <script src="js/Knight.js"></script>
+    <script src="js/Bishop.js"></script>
+    <script src="js/Rook.js"></script>
+    <script src="js/Queen.js"></script>
+    <script src="js/King.js"></script>
+    <script src="js/chess-constants.js"></script>
+    <script src="js/ChessModel.js"></script>
+    <script src="js/ChessViewer.js"></script>
+    <script src="js/Chess.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
