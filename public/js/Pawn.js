@@ -64,19 +64,20 @@ class Pawn extends Piece{
     }
     move(board, target){
 
-        if(this.first_move && Math.abs(this.current_position - target) === 16){
+        if(this.first_move){
             this.first_move = false;
-
-            // check left
-            let left = board[target + MOVES[DIRECTIONS.LEFT]];
-            if( left !== null && left.toString() === "Pawn" && left.owner != this.owner){
-                left.en_passant = this;
-            }
-            
-            // check right
-            let right = board[target + MOVES[DIRECTIONS.RIGHT]];
-            if( right !== null && right.toString() === "Pawn" && right.owner != this.owner){
-                right.en_passant = this;
+            if(Math.abs(this.current_position - target) === 16){
+                // check left
+                let left = board[target + MOVES[DIRECTIONS.LEFT]];
+                if( left !== null && left.toString() === "Pawn" && left.owner != this.owner){
+                    left.en_passant = this;
+                }
+                
+                // check right
+                let right = board[target + MOVES[DIRECTIONS.RIGHT]];
+                if( right !== null && right.toString() === "Pawn" && right.owner != this.owner){
+                    right.en_passant = this;
+                }
             }
         }
 
