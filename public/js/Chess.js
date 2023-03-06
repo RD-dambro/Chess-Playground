@@ -77,6 +77,11 @@ class Chess{
             this.turn = 0;
             this.view.gameend_popup.classList.remove("hidden");
         }
+
+        if(!this.sound_played && this.model.isCheck(new_piece.owner)){
+            this.play("check");
+            this.sound_played = false;
+        }
     }
 
     onPointerDown(e){
