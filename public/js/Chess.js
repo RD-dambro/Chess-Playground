@@ -6,7 +6,7 @@ class Chess{
 
     sound_played;
 
-    constructor(black = true){
+    constructor(black = false){
         this.init(black);
     }
 
@@ -121,7 +121,7 @@ class Chess{
     }
 
     play(effect){
-        var audio = new Audio(`/sounds/${effect}.wav`);
+        var audio = new Audio(`sounds/${effect}.wav`);
         audio.play();
         this.sound_played = true;
     }

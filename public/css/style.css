@@ -81,43 +81,43 @@ main{
 }
 
 .light-pawn {
-    background: center / contain no-repeat url("/images/chess/light-pawn.svg");
+    background: center / contain no-repeat url("chess/light-pawn.svg");
 }
 .dark-pawn {
-    background: center / contain no-repeat url("/images/chess/dark-pawn.svg");
+    background: center / contain no-repeat url("chess/dark-pawn.svg");
 }
 
 .light-knight {
-    background: center / contain no-repeat url("/images/chess/light-knight.svg");
+    background: center / contain no-repeat url("chess/light-knight.svg");
 }
 .dark-knight {
-    background: center / contain no-repeat url("/images/chess/dark-knight.svg");
+    background: center / contain no-repeat url("chess/dark-knight.svg");
 }
 
 .light-bishop {
-    background: center / contain no-repeat url("/images/chess/light-bishop.svg");
+    background: center / contain no-repeat url("chess/light-bishop.svg");
 }
 .dark-bishop {
-    background: center / contain no-repeat url("/images/chess/dark-bishop.svg");
+    background: center / contain no-repeat url("chess/dark-bishop.svg");
 }
 
 .light-rook {
-    background: center / contain no-repeat url("/images/chess/light-rook.svg");
+    background: center / contain no-repeat url("chess/light-rook.svg");
 }
 .dark-rook {
-    background: center / contain no-repeat url("/images/chess/dark-rook.svg");
+    background: center / contain no-repeat url("chess/dark-rook.svg");
 }
 
 .light-queen {
-    background: center / contain no-repeat url("/images/chess/light-queen.svg");
+    background: center / contain no-repeat url("chess/light-queen.svg");
 }
 .dark-queen {
-    background: center / contain no-repeat url("/images/chess/dark-queen.svg");
+    background: center / contain no-repeat url("chess/dark-queen.svg");
 }
 
 .light-king {
-    background: center / contain no-repeat url("/images/chess/light-king.svg");
+    background: center / contain no-repeat url("chess/light-king.svg");
 }
 .dark-king {
-    background: center / contain no-repeat url("/images/chess/dark-king.svg");
+    background: center / contain no-repeat url("chess/dark-king.svg");
 }
