@@ -16,9 +16,10 @@ class ChessView{
 
     src = null;
 
-    constructor({model, black, onPointerDown, onPointerUp, onPointerEnter, onPointerLeave, onPromotionPicked, onRematchClick}){
+    constructor({model, black, onPointerDown, onPointerMove, onPointerUp, onPointerEnter, onPointerLeave, onPromotionPicked, onRematchClick}){
         this.model = model;
         this.black = black;
+        this.onPointerMove = onPointerMove;
         this.onPointerDown = onPointerDown;
         this.onPointerUp = onPointerUp;
         this.onPointerEnter = onPointerEnter;
@@ -32,12 +33,7 @@ class ChessView{
         this.gameend_popup = document.getElementById("gameend-popup");
         this.rematch_button = document.getElementById("rematch");
 
-        this.gameend_popup.addEventListener("click", this.onRematchClick);
-
-        for(let c of this.promotion_popup.getElementsByClassName("option")){
-            c.removeEventListener("click", this.onPromotionPicked)
-            c.addEventListener("click", this.onPromotionPicked)
-        }
+        this.addEventListeners();
         
         if(!this.black)
             this.chessboard.classList.add("rotate");
@@ -53,11 +49,21 @@ class ChessView{
         delete this.constructor;
     }
 
+    addEventListeners(){
+        this.chessboard.addEventListener("pointermove", this.onPointerMove);
+        this.gameend_popup.addEventListener("click", this.onRematchClick);
+
+        for(let c of this.promotion_popup.getElementsByClassName("option")){
+            c.addEventListener("click", this.onPromotionPicked)
+        }
+    }
+
     removeListeners(){
         for(let c of this.promotion_popup.getElementsByClassName("option")){
             c.removeEventListener("click", this.onPromotionPicked)
         }
 
+        this.chessboard.removeEventListener("pointermove", this.onPointerMove);
         this.gameend_popup.removeEventListener("click", this.onRematchClick);
     }
 
@@ -92,7 +98,7 @@ class ChessView{
     }
 
     createEmptySpan(){
-        let span = document.createElement("span");
+        let span = document.createElement("div");
         span.classList.add("nopointer")
         return span
     }

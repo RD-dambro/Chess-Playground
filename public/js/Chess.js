@@ -5,6 +5,7 @@ class Chess{
     turn;
 
     sound_played;
+    moving_piece;
 
     constructor(black = false){
         this.init(black);
@@ -18,6 +19,7 @@ class Chess{
             model: this.model,
             black: this.black,
             onPointerDown: this.onPointerDown.bind(this),
+            onPointerMove: this.onPointerMove.bind(this),
             onPointerUp: this.onPointerUp.bind(this),
             onPointerEnter: this.onPointerEnter.bind(this),
             onPointerLeave: this.onPointerLeave.bind(this),
@@ -48,6 +50,25 @@ class Chess{
     isTheirTurn(pos){
         if (this.model.chessboard[pos] === null) return false;
         return this.turn === this.model.chessboard[pos].owner;
+    }
+
+    setValidMoves(pos){
+        this.view.src = pos;
+
+        this.view.chessboard.children.item(this.view.src).classList.add("grey");
+        // segnala mosse valide
+        this.model.chessboard[this.view.src].getValidMoves(this.model.chessboard)
+            .map( i => this.view.chessboard.children.item(i).classList.add("valid"));
+    }
+
+    unsetValidMoves(pos){
+        if(this.view.src === null) return;
+        // rimuovi mosse valide
+        this.model.chessboard[this.view.src].getValidMoves(this.model.chessboard)
+        .map( i => this.view.chessboard.children.item(i).classList.remove("valid"))
+
+        this.view.chessboard.children.item(this.view.src).classList.remove("grey");
+        this.view.chessboard.children.item(pos).classList.remove("hover");
     }
 
     onRematchClick(e){
@@ -85,16 +106,46 @@ class Chess{
     }
 
     onPointerDown(e){
+        if (e.target.hasPointerCapture(e.pointerId)) {
+            e.target.releasePointerCapture(e.pointerId);
+        }
+
         let id = parseInt(e.target.id);
-        if(!this.model.chessboard[id]) return;
-        if(!this.isTheirTurn(id)) return;
-        this.view.src = id;
-        this.view.chessboard.children.item(this.view.src).classList.add("grey");
-        // segnala mosse valide
-        this.model.chessboard[this.view.src].getValidMoves(this.model.chessboard)
-            .map( i => this.view.chessboard.children.item(i).classList.add("valid"))
+
+        if(!this.moving_piece){
+            if(!this.model.chessboard[id]) return;
+            if(!this.isTheirTurn(id)) return;
+            this.moving_piece = true;
+
+            this.setValidMoves(id);
+        }
+        else{
+            
+            this.unsetValidMoves(id);
+
+            if(id === this.view.src){
+                this.view.src = null;
+                this.moving_piece = false;
+            }
+        }
     }
 
+    onPointerMove(e){
+        // if(this.moving_piece){
+        //     let el = this.view.chessboard.childNodes.item(this.view.src).firstChild;
+        //     // el.style.position = "absolute";
+        //     let [currY] = el.style.marginTop.split("px");
+        //     let [currX] = el.style.marginLeft.split("px");
+
+        //     currY = parseInt(currY) ? parseInt(currY) : 0;
+        //     currX = parseInt(currX) ? parseInt(currX) : 0;
+
+        //     el.style.marginTop = `${currY + e.movementY}px`;
+        //     el.style.marginLeft = `${currX + e.movementX}px`;
+        //     el.style.zIndex = 100;
+
+        // }
+    }
     onPointerEnter(e){
         if(!this.view.src) return;
         if(this.view.src == e.target.id) return;
@@ -110,19 +161,32 @@ class Chess{
 
     onPointerUp(e){
         let dst = parseInt(e.target.id);
-
         if(this.view.src === null) return
 
-        // rimuovi mosse valide
-        this.model.chessboard[this.view.src].getValidMoves(this.model.chessboard)
-            .map( i => this.view.chessboard.children.item(i).classList.remove("valid"))
-
-        this.move(this.view.src, dst);
-        this.view.chessboard.children.item(this.view.src).classList.remove("grey");
-        this.view.chessboard.children.item(dst).classList.remove("hover");
-        this.view.src = null;
-
+        if(this.view.src !== dst){
+            this.unsetValidMoves(dst);
+            this.move(this.view.src, dst);
+            this.view.src = null;
+            this.moving_piece = false;
+        }
         
+        // if(this.released){
+
+            
+
+        //     this.released = false;
+        // }
+        // else {
+        //     if(this.view.src !== dst){
+        //         this.unsetValidMoves(dst);
+        //         this.move(this.view.src, dst);
+        //         this.view.src = null;
+        //         this.moving_piece = false;            
+        //     }
+
+        //     this.released = true;
+        // }
+
     }
 
     play(effect){

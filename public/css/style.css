@@ -1,12 +1,24 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+}
+
 main{
     display: grid;
     justify-content: center;
+    touch-action: none;
 }
 
 #chessboard{
-    height: 400px;
+    height: 368px;
     display: grid;
-    grid-template-columns: repeat( 8, 50px );
+    grid-template-columns: repeat( 8, 46px );
     border: 2px solid black;
     aspect-ratio: 1/1;
 }
@@ -72,6 +84,7 @@ main{
     display: block;
     width: 100%;
     height: 100%;
+    z-index: inherit;
 }
 
 .option.piece {
